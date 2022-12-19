@@ -10,6 +10,16 @@ from selenium.webdriver.support import expected_conditions as ec
 from account import login, passw
 from fake_useragent import UserAgent
 from selenium.webdriver.firefox.options import Options
+from PyQt6.QtWidgets import QApplication, QWidget
+
+
+# app = QApplication([])
+# window = QWidget()
+# window.show()
+#
+#
+# app.exec()
+
 
 ua = UserAgent().random
 options = Options()
@@ -30,7 +40,10 @@ def send_keys(selector, keys):
 
 
 def smile():  # добавить 3 смайлика кота :) :) :)
-    ...
+    cat = '.emoji-field__available-values-block > img:nth-child(2)'
+    wait(cat)
+    for i in range(4):
+        click(cat)
 
 
 try:
@@ -66,5 +79,8 @@ try:
     driver.find_element(By.CSS_SELECTOR, GB_price).send_keys(Keys.BACKSPACE, Keys.BACKSPACE)
     send_keys(GB_price, '30')
     click('div.btns-box a.btn.btn-black')
+    smile()
+    click('.btns-box > a:nth-child(1)')
+
 finally:
-    pass
+    driver.quit()
